@@ -1,0 +1,39 @@
+### Consulta todos los contactos 
+GET http://localhost:3000/contactos
+Content-Type: application/json
+
+### Crear un contacto
+POST http://localhost:3000/contactos HTTP/1.1
+content-type: application/json
+
+{
+    "nombre": "1",
+    "celular": 4335,
+    "apartamento": 1
+}
+
+### Crear un contacto con un dato adicional
+POST http://localhost:3000/contacto HTTP/1.1
+content-type: application/json
+
+{
+    "nombre": "nombre",
+    "celular": 3124,
+    "datox": "datox 1",
+    "SQL": "Select * from contacto"
+}
+
+### Consultar un contacto
+GET http://localhost:3000/contacto/1
+
+### Actualizar un contacto
+PUT http://localhost:3000/contacto/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre": "tattan",
+    "celular": 8756
+}
+
+### Eliminar un contacto
+DELETE http://localhost:3000/contacto/2
