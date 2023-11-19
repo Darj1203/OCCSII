@@ -1,0 +1,2 @@
+### Consulta todos los apartamentos 
+GET http://localhost:3000/apartamentos
