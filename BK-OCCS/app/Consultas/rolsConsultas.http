@@ -1,0 +1,2 @@
+### Obtener todos los roles
+GET http://localhost:8080/rols
