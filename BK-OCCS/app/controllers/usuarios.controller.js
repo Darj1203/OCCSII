@@ -93,3 +93,9 @@ export const CrearUsuario = (req, res) => {
         });
 };
 
+export default  {
+generarTokenYCookie,
+verificarToken,
+cerrarSesion,
+CrearUsuario
+}
