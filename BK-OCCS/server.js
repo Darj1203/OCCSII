@@ -15,8 +15,6 @@ var corsOptions = {
     optionsSuccessStatus: 200,
 };
 
-app.use('/apartamentos', apartamentosRouter);
-
 //Sincronizar la base de datos
 db.config.sync()
     .then(()=>{
@@ -43,6 +41,7 @@ const forceSync = async () => {
 forceSync();
 
 app.use(cors(corsOptions));
+app.use('/apartamentos', apartamentosRouter);
 
 app.listen(3000, () => {
     console.log('Example app listening on port 3000!');

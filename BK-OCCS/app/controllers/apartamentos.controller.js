@@ -114,7 +114,11 @@ export const EliminarApartamento = (req, res) => {
         });
 };
 
+<<<<<<< HEAD
 export default  {
+=======
+export default {
+>>>>>>> f67d28463503dd38661605267a3ecbc38c20a416
     BuscarTodos,
     BuscarUno,
     CrearApartamento,
