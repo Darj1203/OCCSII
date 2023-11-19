@@ -2,6 +2,9 @@ import express from 'express';
 import db from './app/models/bdoccs.js';
 import cors from 'cors';
 
+//Importamos las rutas de cada entidad
+import apartamentosRouter from './app/routes/apartamentos.routes.js';
+
 const app = express();
 
 app.use(express.json());
@@ -12,7 +15,7 @@ var corsOptions = {
     optionsSuccessStatus: 200,
 };
 
-//app.use('/apartamentos', apartamentosRouter);
+app.use('/apartamentos', apartamentosRouter);
 
 //Sincronizar la base de datos
 db.config.sync()
