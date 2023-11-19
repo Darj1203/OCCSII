@@ -1,2 +1,38 @@
 ### Consulta todos los apartamentos 
 GET http://localhost:3000/apartamentos
+Content-Type: application/json
+
+### Crear un apartamento
+POST http://localhost:3000/apartamentos HTTP/1.1
+content-type: application/json
+
+{
+    "torre": "torre 1",
+    "apartamento": "apartamento 1"
+}
+
+### Crear un apartamento con un dato adicional
+POST http://localhost:3000/apartamentos HTTP/1.1
+content-type: application/json
+
+{
+    "torre": "torre 1",
+    "apartamento": "apartamento 1",
+    "datox": "datox 1",
+    "SQL": "Select * from apartamento"
+}
+
+### Consultar un apartamento
+GET http://localhost:3000/apartamentos/1
+
+### Actualizar un apartamento
+PUT http://localhost:3000/apartamentos/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "torre": "torre 2",
+    "apartamento": "apartamento 304"
+}
+
+### Eliminar un apartamento
+DELETE http://localhost:3000/apartamentos/2
