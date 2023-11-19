@@ -115,3 +115,11 @@ export const EliminarContacto = (req, res) => {
             });
         });
 };
+
+export default  {
+    BuscarTodos,
+    BuscarUno,
+    CrearContacto,
+    ActualizarContacto,
+    EliminarContacto
+}

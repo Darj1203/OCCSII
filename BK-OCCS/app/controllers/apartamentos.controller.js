@@ -114,7 +114,7 @@ export const EliminarApartamento = (req, res) => {
         });
 };
 
-export default ApartamentoController = {
+export default  {
     BuscarTodos,
     BuscarUno,
     CrearApartamento,
