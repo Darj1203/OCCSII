@@ -5,6 +5,7 @@ import cors from 'cors';
 //Importamos las rutas de cada entidad
 import apartamentosRouter from './app/routes/apartamentos.routes.js';
 import contactosRouter from './app/routes/contactos.routes.js';
+import rolsController from './app/controllers/rols.controller.js';
 
 const app = express();
 
@@ -44,6 +45,7 @@ forceSync();
 app.use(cors(corsOptions));
 app.use('/apartamentos', apartamentosRouter);
 app.use('/contactos', contactosRouter);
+app.use('/rols', rolsController);
 
 app.listen(3000, () => {
     console.log('Example app listening on port 3000!');
