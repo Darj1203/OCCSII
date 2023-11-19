@@ -1,14 +1,10 @@
 import jwt from 'jsonwebtoken';
 import db from '../models/bdoccs.js';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
+import jsonwebtoken from 'jsonwebtoken';
 
 
 const BDUsuarios = db.usuarios;
-
-//Generar una cookie con token que expira en 24 horas y reciba usuario y contraseña
-
-// ...
 
 export const generarTokenYCookie = async (req, res) => {
     const { correo, contrasena } = req.body;
@@ -27,7 +23,7 @@ export const generarTokenYCookie = async (req, res) => {
 
         if (contrasenaValida) {
             // Generar el token
-            const token = jwt.sign({ correo: correo }, 'ClaveParaHashear123', { expiresIn: '24h' })
+            const token = jsonwebtoken.sign({ correo: correo }, 'ClaveParaHashear123', { expiresIn: '24h' })
             // Establecer la cookie en la respuesta
             res.cookie('token', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true });
             res.status(202).send({ mensaje: 'Inicio de sesión exitoso.' });

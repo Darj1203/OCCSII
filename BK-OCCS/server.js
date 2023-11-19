@@ -6,7 +6,7 @@ import cors from 'cors';
 import apartamentosRouter from './app/routes/apartamentos.routes.js';
 import contactosRouter from './app/routes/contactos.routes.js';
 import rolsRouter from './app/routes/rols.routes.js';
-
+import usuariosRouter from './app/routes/usuarios.routes.js'
 const app = express();
 
 app.use(express.json());
@@ -46,6 +46,7 @@ app.use(cors(corsOptions));
 app.use('/apartamentos', apartamentosRouter);
 app.use('/contactos', contactosRouter);
 app.use('/roles', rolsRouter);
+app.use('/usuarios',usuariosRouter )
 
 app.listen(3000, () => {
     console.log('Example app listening on port 3000!');
