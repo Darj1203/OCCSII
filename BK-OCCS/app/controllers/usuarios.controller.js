@@ -1,35 +1,95 @@
 import jwt from 'jsonwebtoken';
 import db from '../models/bdoccs.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
 
 const BDUsuarios = db.usuarios;
 
 //Generar una cookie con token que expira en 24 horas y reciba usuario y contraseña
-export const generarTokenYCookie = (req, res) => {
-    const { usuario, contrasena } = req.body;
-  
+
+// ...
+
+export const generarTokenYCookie = async (req, res) => {
+    const { correo, contrasena } = req.body;
+
     // Aquí deberías verificar el usuario y la contraseña con tu base de datos
-    if(!usuario || !contrasena){
-        res.status(400).send({
+    if (!correo || !contrasena) {
+        res.status(204).send({
             mensaje: 'El contenido no puede estar vacio'
         });
         return;
     }
 
-    BDUsuarios.findOne({ where: { usuario: usuario, contrasena: contrasena } })
-        .then ((data) => {
-            if (data) {
-                // Si el usuario y la contraseña son válidos, entonces genera el token
-                const token = jwt.sign({ usuario, contrasena }, 'tu_clave_secreta', { expiresIn: '24h' });
-                res.cookie('token', token, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }); // maxAge está en milisegundos
-                res.status(200).send({ message: 'Cookie con token generada.' });
-            }
-            else {
-                console.log('Usuario no encontrado');
-            }
+    const usuarioEncontrado = await BDUsuarios.findOne({ where: { correo: correo } });
+    if (usuarioEncontrado) {
+        const contrasenaValida = await bcrypt.compare(contrasena, usuarioEncontrado.contrasena);
+
+        if (contrasenaValida) {
+            // Generar el token
+            const token = jwt.sign({ correo: correo }, 'ClaveParaHashear123', { expiresIn: '24h' })
+            // Establecer la cookie en la respuesta
+            res.cookie('token', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true });
+            res.status(202).send({ mensaje: 'Inicio de sesión exitoso.' });
+        } else {
+            res.status(401).send({ mensaje: 'Contraseña incorrecta' });
+        }
+    } else {
+        res.status(404).send({ mensaje: 'El correo no está en nuestro servidor' });
+    }
+};
+
+  //Verificar si el usuario tiene un token valido
+export const verificarToken = (req, res, next) => {
+    // Obtener el token de la cookie
+    const token = req.cookies.token;
+  
+    // Si no hay token, entonces no está autorizado
+    if (!token) {
+      return res.status(401).send({ message: 'No se proporcionó un token.' });
+    }
+  
+    // Verificar si el token es válido
+    jwt.verify(token, 'ClaveParaHashear123', (err, decodedToken) => {
+      if (err) {
+        console.log(err);
+        return res.status(401).send({ message: 'Token inválido.' });
+      } else {
+        console.log(decodedToken);
+        next();
+      }
+    });
+  };
+
+    //Cerrar sesión
+export const cerrarSesion = (req, res) => {
+    res.cookie('token', '', { maxAge: 1 });
+    res.status(423).send({ message: 'Sesión cerrada.' });
+};
+
+//Crear un usuario
+export const CrearUsuario = (req, res) => {
+    if (!req.body.usuario || !req.body.contrasena || !req.body.rol) {
+        res.status(204).send({
+            mensaje: 'El contenido no puede estar vacio'
+        });
+        return;
+    }
+
+    const usuario = {
+        usuario: req.body.usuario,
+        contrasena: bcrypt.hash(req.body.contrasena),
+        rol: req.body.rol
+    };
+
+    BDUsuarios.create(usuario)
+        .then((data) => {
+            res.send(data);
         })
         .catch((error) => {
             res.status(500).send({
-                mensaje: 'Error al consultar el usuario'
+                mensaje: error.message || 'Error al crear el usuario'
             });
-        });  
-  };
+        });
+};
+

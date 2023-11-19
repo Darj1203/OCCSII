@@ -1,5 +1,11 @@
+
 export default (config, DataTypes, RolsModel) => {
     const UsuariosModel = config.define("Usuarios", {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true
+        },
         correo: {
             type: DataTypes.STRING,
             allowNull: false
@@ -16,6 +22,6 @@ export default (config, DataTypes, RolsModel) => {
                 key: 'id'
             }
         }
-    })
+    });
     return UsuariosModel;
 };

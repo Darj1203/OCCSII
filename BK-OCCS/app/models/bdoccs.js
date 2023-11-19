@@ -16,5 +16,4 @@ db.contactos = ContactosModel(config, Sequelize, db.apartamentos);
 db.rols = RolsModel(config, Sequelize);
 db.usuarios = UsuariosModel(config, Sequelize, db.rols);
 
-
 export default db;
