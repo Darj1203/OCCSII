@@ -1,2 +1,2 @@
 ### Obtener todos los roles
-GET http://localhost:8080/rols
+GET http://localhost:3000/rols
