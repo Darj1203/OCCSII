@@ -38,7 +38,7 @@ export const BuscarUno = (req, res) => {
 
 //Crear un rol
 export const CrearRol = (req, res) => {
-    if (!req.body.nombre) {
+    if (!req.body.rol) {
         res.status(400).send({
             mensaje: 'El contenido no puede estar vacio'
         });
@@ -46,7 +46,7 @@ export const CrearRol = (req, res) => {
     }
 
     const rol = {
-        nombre: req.body.nombre
+        rol: req.body.rol
     };
 
     BDRol.create(rol)
