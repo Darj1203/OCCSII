@@ -1,6 +1,5 @@
 import db from '../models/bdoccs.js';
 
-const Op = db.Sequelize.Op;
 const BDApartamento = db.apartamentos;
 
 //Obtener todos los apartamentos
@@ -34,6 +33,83 @@ export const BuscarUno = (req, res) => {
         .catch((error) => {
             res.status(500).send({
                 mensaje: 'Error al consultar el apartamento con el id: ' + id
+            });
+        });
+};
+
+//Crear un apartamento 
+export const CrearApartamento = (req, res) => {
+    if (!req.body.torre || !req.body.apartamento) {
+        res.status(400).send({
+            mensaje: 'El contenido no puede estar vacio'
+        });
+        return;
+    }
+
+    const apartamento = {
+        torre: req.body.torre,
+        apartamento: req.body.apartamento
+    };
+
+    BDApartamento.create(apartamento)
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((error) => {
+            res.status(500).send({
+                mensaje: error.message || 'Error al crear el apartamento'
+            });
+        });
+};
+
+//Actualizar un apartamento por id
+export const ActualizarApartamento = (req, res) => {
+    const id = req.params.id;
+
+    BDApartamento.update(req.body, {
+        where: { id: id }
+    })
+        .then((num) => {
+            if (num == 1) {
+                res.send({
+                    mensaje: 'Apartamento actualizado correctamente'
+                });
+            }
+            else {
+                res.send({
+                    mensaje: 'No se pudo actualizar el apartamento con el id: ' + id
+                });
+            }
+        })
+        .catch((error) => {
+            res.status(500).send({
+                mensaje: 'Error al actualizar el apartamento con el id: ' + id
+            });
+        });
+};
+
+//Eliminar un apartamento por id
+export const EliminarApartamento = (req, res) => {
+    const id = req.params.id;
+
+    BDApartamento.destroy({
+        where: { id: id }
+    })
+        .then((num) => {
+            if (num == 1) {
+                res.send({
+                    mensaje: 'Apartamento eliminado correctamente'
+                });
+            }
+            else {
+                res.send({
+                    mensaje: 'No se pudo eliminar el apartamento con el id: ' + id
+                });
+            }
+        })
+        .catch((error) => {
+            res.status(500).send({
+                mensaje: 'Error al eliminar el apartamento con el id: ' + id
             });
         });
 };
