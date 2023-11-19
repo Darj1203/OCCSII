@@ -93,7 +93,7 @@ export const CrearUsuario = (req, res) => {
         });
 };
 
-export default  {
+export default {
 generarTokenYCookie,
 verificarToken,
 cerrarSesion,
