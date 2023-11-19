@@ -13,12 +13,13 @@ content-type: application/json
 }
 
 ### Crear un contacto con un dato adicional
-POST http://localhost:3000/contacto HTTP/1.1
+POST http://localhost:3000/contactos HTTP/1.1
 content-type: application/json
 
 {
     "nombre": "nombre",
     "celular": 3124,
+    "apartamento": 1,
     "datox": "datox 1",
     "SQL": "Select * from contacto"
 }

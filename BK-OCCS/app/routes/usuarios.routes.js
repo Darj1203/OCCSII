@@ -4,8 +4,8 @@ import express from 'express';
 const router = express.Router(); 
 
 // Crear nuestras rutas
-router.get('/', usuariosController.generarTokenYCookie);
-router.get('/', usuariosController.verificarToken);
-router.post('/', usuariosController.cerrarSesion);
-router.post('/', usuariosController.CrearUsuario);
+router.get('/autorizar', usuariosController.generarTokenYCookie);
+router.get('/verificar', usuariosController.verificarToken);
+router.post('/cerrarsesion', usuariosController.cerrarSesion);
+router.post('crearusuario', usuariosController.CrearUsuario);
 export default router;

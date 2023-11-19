@@ -1,6 +1,11 @@
 ###### Generar token
-POST  http://localhost:3000/usuarios
+POST  http://localhost:3000/usuarios HTTP/1.1
 Content-Type: application/json
+
+{
+    "correo": "admin@demo.com",
+    "contraseña": "demo1234"
+}
 
 ### Verificar token
 GET  http://localhost:3000/usuarios HTTP/1.1
@@ -9,12 +14,17 @@ content-type: application/json
 
 
 ### cerrar sesion
-POST http://localhost:3000/usuarios HTTP/1.1
+POST http://localhost:3000/usuarios/cerrarsesion HTTP/1.1
 content-type: application/json
 
 
 ### Crear usuario
 
-POST http://localhost:3000/usuarios HTTP/1.1
+POST http://localhost:3000/usuarios/crearusuario HTTP/1.1
 content-type: application/json
 
+{
+    "correo": "admin@demo.com",
+    "contraseña": "demo1234",
+    "rol": 1
+}
