@@ -4,11 +4,11 @@ import express from 'express';
 const router = express.Router(); 
 
 // Crear nuestras rutas
-router.get('/', apartamentosController.BuscarTodos);
-router.get('/:id', apartamentosController.BuscarUno);
-router.post('/', apartamentosController.CrearContacto);
-router.put('/:id', apartamentosController.ActualizarContacto);
-router.delete('/:id', apartamentosController.EliminarContacto);
+router.get('/', contactosController.BuscarTodos);
+router.get('/:id', contactosController.BuscarUno);
+router.post('/', contactosController.CrearContacto);
+router.put('/:id', contactosController.ActualizarContacto);
+router.delete('/:id', contactosController.EliminarContacto);
 
 
 export default router;
