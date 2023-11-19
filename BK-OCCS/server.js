@@ -39,7 +39,7 @@ const forceSync = async () => {
     }
 }
 
-//forceSync();
+forceSync();
 
 app.use(cors(corsOptions));
 app.use('/apartamentos', apartamentosRouter);
