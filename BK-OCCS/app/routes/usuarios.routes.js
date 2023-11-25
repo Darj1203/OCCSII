@@ -7,5 +7,5 @@ const router = express.Router();
 router.get('/autorizar', usuariosController.generarTokenYCookie);
 router.get('/verificar', usuariosController.verificarToken);
 router.post('/cerrarsesion', usuariosController.cerrarSesion);
-router.post('crearusuario', usuariosController.CrearUsuario);
+router.post('/crearusuario', usuariosController.CrearUsuario);
 export default router;
