@@ -1,6 +1,6 @@
 import { Sequelize } from "sequelize";
 
-export const config = new Sequelize("occsdb", "root", "Tattan123", {
+export const config = new Sequelize("occsdb", "root", "", {
     host: "localhost",
     dialect: "mysql",
     operatorsAliases: false,

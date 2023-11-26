@@ -35,5 +35,8 @@ content-type: application/json
     "usuario": "admin@demo.com",
     "contrasena": "1233123",
     "rol": 1
-
 }
+
+### Obtener datos de usuarios /datosdeusuario/:id'
+GET http://localhost:3000/usuarios/datosdeusuario/1 HTTP/1.1
+content-type: application/json
