@@ -7,6 +7,7 @@ import jsonwebtoken from 'jsonwebtoken';
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 const BDUsuarios = db.usuarios;
+const BDRoles = db.rols;
 
 export const generarTokenYCookie = async (req, res) => {
     
@@ -110,9 +111,23 @@ export const CrearUsuario = async (req, res) => {
         });
 };
 
+export const DatosdeUsuarios = (req, res) => {
+    //Buscar todos los datos de usuarios y roles del usuario que se pide por paramentros id
+BDUsuarios.findOne({where: { id: req.params.id }, include: [BDRoles]})
+        .then((data) => {
+            res.status(200).send(data);
+        })
+        .catch((err) => {
+            res.status(500).send({
+                mensaje: err.message || 'Error al buscar el usuario',
+            });
+        });
+}
+
 export default {
     generarTokenYCookie,
     verificarToken,
     cerrarSesion,
-    CrearUsuario
+    CrearUsuario,
+    DatosdeUsuarios
 }
