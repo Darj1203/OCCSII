@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ConexionService } from './conexion.service';
 import { Apartamentos } from '../interfaces/apartamentos';
+import { Observable } from 'rxjs';
+import { NgClass } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class ApartamentosService {
 
   constructor(private http: HttpClient, private conexion: ConexionService) { }
@@ -19,23 +23,23 @@ export class ApartamentosService {
   public URLAPI=this.conexion.URLAPI;
 
   //Buscar todos los apartamentos de apartamentos peticion get en una api con formato json
-  public buscarTodos(){
-    return this.http.get(this.URLAPI+"apartamentos");
+  public buscarTodos(): Observable<Apartamentos[]> {
+    return this.http.get<Apartamentos[]>(this.URLAPI+'apartamentos');
   }
   //Buscar un apartamento de apartamentos/:id peticion get en una api con formato json
-  public buscarUno(){
-    return this.http.get(this.URLAPI+"apartamentos/"+this.apartamentos.id);
+  public buscarUno(id:number): Observable<Apartamentos>{
+    return this.http.get<Apartamentos>(this.URLAPI+"apartamentos/"+ id);
   }
   //Crear un apartamento de apartamentos peticion post en una api con formato json
-  public crear(){
-    return this.http.post(this.URLAPI+"apartamentos", this.apartamentos);
+  public crear(apartamentos: Apartamentos){
+    return this.http.post(this.URLAPI+"apartamentos", apartamentos);
   }
   //Actualizar un apartamento de apartamentos/:id peticion put en una api con formato json
-  public actualizar(){
-    return this.http.put(this.URLAPI+"apartamentos/"+this.apartamentos.id, this.apartamentos);
+  public actualizar(id:number, apartamentos: Apartamentos){
+    return this.http.put(this.URLAPI+"apartamentos/"+id, apartamentos);
   }
   //Eliminar un apartamento de apartamentos/:id peticion delete en una api con formato json
-  public eliminar(){
-    return this.http.delete(this.URLAPI+"apartamentos/"+this.apartamentos.id);
+  public eliminar(id: number){
+    return this.http.delete(this.URLAPI+"apartamentos/"+id);
   }
 }

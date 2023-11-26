@@ -8,7 +8,7 @@ content-type: application/json
 
 {
     "torre": "torre 1",
-    "apartamento": "apartamento 1"
+    "apartamento": "apartamento 3"
 }
 
 ### Crear un apartamento con un dato adicional

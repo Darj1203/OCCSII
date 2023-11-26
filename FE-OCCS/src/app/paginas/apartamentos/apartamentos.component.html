@@ -1,27 +1,27 @@
 <div class="max-w-4xl mx-auto">
     <button class="p-2 bg-green-500 border-r-4 m-2 text-white hover:bg-green-700">Crear</button>
-        <!-- Tabla -->
-        <table class="min-w-full bg-white border border-gray-300">
-            <!-- Encabezado de la tabla -->
-            <thead>
-                <tr>
-                    <th class="py-2 px-4 border-b">Torre</th>
-                    <th class="py-2 px-4 border-b">Apartamentos</th>
-                    <th class="py-2 px-4 border-b">Acciones</th>
-                </tr>
-            </thead>
-            <!-- Contenido de la tabla -->
-            <tbody>
-                <tr class="bg-gray-100">
-                    <td class="text-center">A</td>
-                    <td class="text-center">101</td>
-                    <td class="text-sm text-white content-center flex justify-center">
-                      <button class="p-2 bg-blue-500 m-2  hover:bg-blue-700">Contactos</button>
-                      <button class="p-2 bg-yellow-500 m-2 hover:bg-yellow-700">Editar</button>
-                      <button class="p-2 bg-red-500 m-2  hover:bg-red-700">Eliminar</button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <!-- Tabla -->
+    <table class="min-w-full bg-white border border-gray-300">
+        <!-- Encabezado de la tabla -->
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b">Torre</th>
+                <th class="py-2 px-4 border-b">Apartamentos</th>
+                <th class="py-2 px-4 border-b">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="bg-gray-100" *ngFor="let apartamento of listApartamentos;">
+                <td class="text-center">{{apartamento.torre}}</td>
+                <td class="text-center">{{apartamento.apartamento}}</td>
+                <td class="text-sm text-white content-center flex justify-center">
+                  <button class="p-2 bg-blue-500 m-2  hover:bg-blue-700">Contactos</button>
+                  <button class="p-2 bg-yellow-500 m-2 hover:bg-yellow-700">Editar</button>
+                  <button class="p-2 bg-red-500 m-2  hover:bg-red-700">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+            
 
