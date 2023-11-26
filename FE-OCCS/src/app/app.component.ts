@@ -9,7 +9,7 @@ import { HttpClientModule } from '@angular/common/http';
 //importemos servicios
 
 //importemos modulos
-
+import {MenuComponent} from './paginas/Modulos/menu/menu.component'
 //importamos las páginas
 
 
@@ -20,6 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
     CommonModule, 
     RouterOutlet,
     HttpClientModule,
+    MenuComponent
     ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
