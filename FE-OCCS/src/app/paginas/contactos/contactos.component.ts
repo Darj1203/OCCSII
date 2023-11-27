@@ -11,19 +11,20 @@ import { Contactos } from '../../interfaces/contactos';
   styleUrl: './contactos.component.css'
 })
 export class ContactosComponent {
-  constructor(private apartamentosService: ContactosService) {}
+
+  constructor(private contactosService: ContactosService) {}
 
   public contacto: Contactos = {
-    id: 0,
     nombre: '',
-    celular: 0
+    celular: 111111111,
+    apartamento_id: 1
   };
 
   public listContactos: Contactos[] = [];
   
   public ngOnInit() {
     //Buscar todos los contactos usar la funcion buscarTodos y guardarlo en listContactos
-    this.ContactosService.subscribe((data: Contactos[]) => {
+    this.contactosService.buscarTodos().subscribe((data: Contactos[]) => {
       this.listContactos = data;
     });
   }
