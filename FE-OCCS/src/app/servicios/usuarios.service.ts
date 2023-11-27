@@ -21,11 +21,6 @@ export class UsuariosService {
     password: "",
     rol: 0
   }
-  //crear el metodo para autorizar todos los usuarios de usuarios/autorizar en una api con formato json
-  public autorizar(){
-    return this.http.post(this.URLAPI+"usuarios/autorizar", this.usuarios);
-  }
-
   //crear el metodo para verificar si el usuario esta logueado con una cookie
   isLoggedIn(): boolean {
     return this.cookieService.check('token');
@@ -41,6 +36,10 @@ export class UsuariosService {
   //crear el metodo para crear la cookie
   setCookie(key: string, value: string){
     this.cookieService.set(key, value);
+  }
+  //crear el metodo para autorizar todos los usuarios de usuarios/autorizar en una api con formato json
+  public autorizar(){
+    return this.http.post(this.URLAPI+"usuarios/autorizar", this.usuarios);
   }
   //crear el metodo para verificr usuarios de usuarios/verificar en una api con formato json
   public verificar(){
