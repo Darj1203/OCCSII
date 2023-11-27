@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 // Importemos interfaces
 import { Apartamentos } from './interfaces/apartamentos';
@@ -23,6 +24,7 @@ import { MenuComponent } from './paginas/Modulos/menu/menu.component';
 import { LoginComponent } from './paginas/login/login.component';
 import { ApartamentosComponent } from './paginas/apartamentos/apartamentos.component';
 import { ContactosComponent } from './paginas/contactos/contactos.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -31,6 +33,7 @@ import { ContactosComponent } from './paginas/contactos/contactos.component';
     CommonModule, 
     RouterOutlet,
     HttpClientModule,
+    FormsModule,
     CerrarSesionComponent,
     MenuComponent,
     LoginComponent,
