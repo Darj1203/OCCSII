@@ -44,8 +44,11 @@ import { ContactosComponent } from './paginas/contactos/contactos.component';
     UsuariosService,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
+
 })
+
 export class AppComponent {
   title = 'APLICACION OCCS'; 
+  constructor(private usuariosService: UsuariosService) {}
 }

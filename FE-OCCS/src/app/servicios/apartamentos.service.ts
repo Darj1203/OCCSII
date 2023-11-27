@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { ConexionService } from './conexion.service';
 import { Apartamentos } from '../interfaces/apartamentos';
 import { Observable } from 'rxjs';
-import { NgClass } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -31,12 +30,12 @@ export class ApartamentosService {
     return this.http.get<Apartamentos>(this.URLAPI+"apartamentos/"+ id);
   }
   //Crear un apartamento de apartamentos peticion post en una api con formato json
-  public crear(apartamentos: Apartamentos){
-    return this.http.post(this.URLAPI+"apartamentos", apartamentos);
+  public crearApartamento(apartamentos: Apartamentos): Observable<Apartamentos>{
+    return this.http.post<Apartamentos>(this.URLAPI+"apartamentos", apartamentos);
   }
   //Actualizar un apartamento de apartamentos/:id peticion put en una api con formato json
-  public actualizar(id:number, apartamentos: Apartamentos){
-    return this.http.put(this.URLAPI+"apartamentos/"+id, apartamentos);
+  public actualizar(id:number, apartamentos: Apartamentos): Observable<Apartamentos>{
+    return this.http.put<Apartamentos>(this.URLAPI+"apartamentos/"+id, apartamentos);
   }
   //Eliminar un apartamento de apartamentos/:id peticion delete en una api con formato json
   public eliminar(id: number){
