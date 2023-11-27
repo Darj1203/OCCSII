@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApartamentosService } from '../../servicios/apartamentos.service';
 import { Apartamentos } from '../../interfaces/apartamentos';
-import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-apartamentos',
@@ -21,6 +21,7 @@ export class ApartamentosComponent {
   };
 
   public listApartamentos: Apartamentos[] = [];
+  
   public ngOnInit() {
     //Buscar todos los apartamentos usar la funcion buscarTodos y guardarlo en listApartamentos
     this.apartamentosService.buscarTodos().subscribe((data: Apartamentos[]) => {
