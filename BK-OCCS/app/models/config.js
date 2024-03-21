@@ -1,7 +1,7 @@
 import { Sequelize } from "sequelize";
 
-export const config = new Sequelize("occsbd", "root", "", {
-    host: "localhost",
+export const config = new Sequelize("ppjcwciu_OCCSBD", "ppjcwciu_OCCSuser", "U_x=WK6K@#lf", {
+    host: "216.246.46.37",
     dialect: "mysql",
     operatorsAliases: false,
     pool: {
