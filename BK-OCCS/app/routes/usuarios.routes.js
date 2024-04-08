@@ -8,6 +8,5 @@ router.post('/autorizar', usuariosController.generarTokenYCookie);
 router.post('/verificar', usuariosController.verificarToken);
 router.post('/cerrarsesion', usuariosController.cerrarSesion);
 router.post('/crearusuario', usuariosController.CrearUsuario);
-router.get('/datosdeusuario/:id', usuariosController.DatosdeUsuarios);
 
 export default router;

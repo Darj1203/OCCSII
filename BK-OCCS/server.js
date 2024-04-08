@@ -13,7 +13,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 var corsOptions = {
-    origin: 'http://localhost:4200',
+    origin: "",
     optionsSuccessStatus: 200,
 };
 
