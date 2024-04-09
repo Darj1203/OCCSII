@@ -7,7 +7,7 @@ POST http://localhost:3000/apartamentos HTTP/1.1
 content-type: application/json
 
 {
-    "torre": "torre 1",
+    "torre": "torre 2",
     "apartamento": "apartamento 3"
 }
 

@@ -39,7 +39,9 @@ export class ContactosService {
   public eliminar(id: number){
     return this.http.delete(this.URLAPI+"contactos/"+id);
   }
-  
-  
+  // Buscar por el id del apartamento 
+  buscarIDAPARTAMENTO(idApartamento: any): Observable<Contactos[]> {
+    return this.http.get<Contactos[]>(this.URLAPI+`contactos/apartamento/${idApartamento}`);
+  }
 }
  

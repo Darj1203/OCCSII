@@ -1,3 +1,4 @@
+import { where } from 'sequelize';
 import db from '../models/bdoccs.js';
 
 
@@ -37,6 +38,20 @@ export const BuscarUno = (req, res) => {
             });
         });
 };
+
+//Obtener lista de contactos por id Apartamento
+export const BuscarIDapartamento = (req, res) => {
+    const id = req.params.id;
+
+    BDContactos.findAll({ where: { apartamento : id } })
+        .then((data) => {
+            res.send(data);
+        }).catch((error) => {
+            res.status(500).send({
+                mensaje: "No se encuentran contactos con este id apartamento"
+            })
+        })
+}
 
 //Crear un contacto
 export const CrearContacto = (req, res) => {
@@ -120,6 +135,7 @@ export default  {
     BuscarTodos,
     BuscarUno,
     CrearContacto,
+    BuscarIDapartamento,
     ActualizarContacto,
     EliminarContacto
 }

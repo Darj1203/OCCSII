@@ -12,10 +12,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-var corsOptions = {
-    origin: "",
-    optionsSuccessStatus: 200,
-};
+app.use(cors());
 
 //Sincronizar la base de datos
 db.config.sync()
@@ -42,7 +39,6 @@ const forceSync = async () => {
 
 //forceSync();
 
-app.use(cors(corsOptions));
 app.use('/apartamentos', apartamentosRouter);
 app.use('/contactos', contactosRouter);
 app.use('/roles', rolsRouter);

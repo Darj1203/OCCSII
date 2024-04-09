@@ -1,18 +1,17 @@
-import jwt from 'jsonwebtoken';
-import db from '../models/bdoccs.js';
 
+import db from '../models/bdoccs.js';
 import bcrypt from 'bcrypt';
-import jsonwebtoken from 'jsonwebtoken';
+import jwt from 'jsonwebtoken';
 
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 const BDUsuarios = db.usuarios;
 const BDRoles = db.rols;
 
-export const generarTokenYCookie = async (req, res) => {
+export const login = async (req, res) => {
     
     // Aquí deberías verificar el usuario y la contraseña con tu base de datos
-    if (!req.body.usuario || !req.body.contrasena) {
+    if (!req.body.correo || !req.body.password) {
         res.status(204).send({
             mensaje: 'El contenido no puede estar vacio'
         });
@@ -21,70 +20,50 @@ export const generarTokenYCookie = async (req, res) => {
 
     //Creamos el modelo usuario
     const usuario = {
-        correo: req.body.usuario,
-        password: req.body.contrasena, 
+        correo: req.body.correo,
+        password: req.body.password, 
     };
 
     const usuarioEncontrado = await BDUsuarios.findOne({ where: { correo: usuario.correo } });
-    if (usuarioEncontrado) {
-        const contrasenaValida = await bcrypt.compare(usuario.password, usuarioEncontrado.password);
-
-        if (contrasenaValida) {
-            // Generar el token
-            const token = jsonwebtoken.sign({ correo: usuario.correo }, 'ClaveParaHashear123', { expiresIn: '24h' })
-            // Establecer la cookie en la respuesta
-            res.cookie('token', token, { maxAge: 24 * 60 * 60 * 1000, httpOnly: true });
-            res.status(202).send({ mensaje: 'Inicio de sesión exitoso.' });
-        } else {
-            res.status(401).send({ mensaje: 'Contraseña incorrecta' });
-        }
-    } else {
-        res.status(404).send({ mensaje: 'El correo no está en nuestro servidor' });
+    
+    if(!usuarioEncontrado){
+        return res.json({error: 'Error en email/Contraseña'})
     }
-};
 
-//Verificar si el usuario tiene un token valido
-export const verificarToken = (req, res, next) => {
-    // Obtener el token de la cookie
-    const token = req.cookies.token;
-  
-    // Si no hay token, entonces no está autorizado
-    if (!token) {
-      return res.status(401).send({ message: 'No se proporcionó un token.' });
+    const eq = bcrypt.compareSync(usuario.password, usuarioEncontrado.password)
+
+    if(!eq){
+        return res.json({error: 'Error en email/Contraseña'})
     }
-  
-    // Verificar si el token es válido
-    jwt.verify(token, 'ClaveParaHashear123', (err, decodedToken) => {
-      if (err) {
-        console.log(err);
-        return res.status(401).send({ message: 'Token inválido.' });
-      } else {
-        console.log(decodedToken);
-        next();
-      }
-    });
+
+    res.json({succes: 'Login Correcto', token: createToken(usuarioEncontrado)})
+
 };
 
-//Cerrar sesión
-export const cerrarSesion = (req, res) => {
-    res.cookie('token', '', { maxAge: 1 });
-    res.status(423).send({ message: 'Sesión cerrada.' });
-};
+//CrearToken
+function createToken(user){
+    const payload = {
+        user_id: user.id,
+        user_rol: user.rol
+    }
+    return jwt.sign(payload, 'Organizacion Control Calidad Seguridad')
+
+}
 
 //Crear un usuario
 export const CrearUsuario = async (req, res) => {
     
-    if (!req.body.usuario || !req.body.contrasena || !req.body.rol) {
+    if (!req.body.correo || !req.body.password || !req.body.rol) {
         res.status(204).send({
             mensaje: 'El contenido no puede estar vacio'
         });
         return;
     }
 
-    const hashearContrasena = async (contrasena) => {
+    const hashearContrasena = async (password) => {
         try {
                 const salt = await bcrypt.genSalt(saltRounds);
-                const hash = await bcrypt.hash(contrasena, salt);
+                const hash = await bcrypt.hash(password, salt);
                 return hash;
             } catch (err) {
                 console.error(err);
@@ -92,10 +71,10 @@ export const CrearUsuario = async (req, res) => {
             }
     };
 
-    const contrasenaHasheada = await hashearContrasena(req.body.contrasena);
+    const contrasenaHasheada = await hashearContrasena(req.body.password);
 
     const usuario = {
-        correo: req.body.usuario,
+        correo: req.body.correo,
         password: contrasenaHasheada,
         rol: req.body.rol,
     };
@@ -113,8 +92,6 @@ export const CrearUsuario = async (req, res) => {
 
 
 export default {
-    generarTokenYCookie,
-    verificarToken,
-    cerrarSesion,
+    login,
     CrearUsuario,
 }

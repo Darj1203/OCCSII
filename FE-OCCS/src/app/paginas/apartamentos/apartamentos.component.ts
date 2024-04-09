@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApartamentosService } from '../../servicios/apartamentos.service';
 import { Apartamentos } from '../../interfaces/apartamentos';
-
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-apartamentos',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './apartamentos.component.html',
   styleUrl: './apartamentos.component.css'
 })
@@ -28,6 +28,8 @@ export class ApartamentosComponent {
       this.listApartamentos = data;
     });
   }
+
+  
 
   };
 

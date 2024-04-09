@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { UsuariosService } from '../../../servicios/usuarios.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,4 +11,12 @@ import { CommonModule } from '@angular/common';
 })
 export class CerrarSesionComponent {
 
+  constructor(private authService: UsuariosService) { }
+
+  ngOnInit(): void {
+  }
+
+  logout() {
+    this.authService.logout(); // Llamar al método de cerrar sesión del servicio de autenticación
+  }
 }

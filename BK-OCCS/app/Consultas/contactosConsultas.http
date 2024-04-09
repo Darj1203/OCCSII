@@ -7,9 +7,9 @@ POST http://localhost:3000/contactos HTTP/1.1
 content-type: application/json
 
 {
-    "nombre": "1",
-    "celular": 4335,
-    "apartamento": 1
+    "nombre": "Nombre de Prueba 25",
+    "celular": 3153780027,
+    "apartamento": 6
 }
 
 ### Crear un contacto con un dato adicional
@@ -25,7 +25,7 @@ content-type: application/json
 }
 
 ### Consultar un contacto con un id
-GET http://localhost:3000/contactos/1
+GET http://localhost:3000/contactos/8
 
 ### Actualizar un contacto
 PUT http://localhost:3000/contactos/1 HTTP/1.1
@@ -38,3 +38,6 @@ Content-Type: application/json
 
 ### Eliminar un contacto
 DELETE http://localhost:3000/contactos/2
+
+### Buscar por id apartamento
+GET http://localhost:3000/contactos/apartamento/6

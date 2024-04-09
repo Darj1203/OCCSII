@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 import { ContactosService } from '../../servicios/contactos.service';
 import { Contactos } from '../../interfaces/contactos';
 
@@ -10,24 +11,27 @@ import { Contactos } from '../../interfaces/contactos';
   templateUrl: './contactos.component.html',
   styleUrl: './contactos.component.css'
 })
-export class ContactosComponent {
+export class ContactosComponent implements OnInit{
 
-  constructor(private contactosService: ContactosService) {}
+  constructor(private contactosService: ContactosService, private route: ActivatedRoute) {}
 
-  public contacto: Contactos = {
-    nombre: '',
-    celular: 111111111,
-    apartamento_id: 1
-  };
-
-  public listContactos: Contactos[] = [];
+  listContactos: Contactos[] = [];
   
-  public ngOnInit() {
-    //Buscar todos los contactos usar la funcion buscarTodos y guardarlo en listContactos
-    this.contactosService.buscarTodos().subscribe((data: Contactos[]) => {
-      this.listContactos = data;
+  ngOnInit(): void {
+    // Obtener el parámetro de la ruta
+    this.route.params.subscribe(params => {
+      const idApartamento = params['id']; // Obtener el ID del apartamento de los parámetros de la ruta
+      if (idApartamento) {
+        // Si hay un ID de apartamento en la ruta, buscar solo los contactos de ese apartamento
+        this.contactosService.buscarIDAPARTAMENTO(idApartamento).subscribe(data => {
+          this.listContactos = data;
+        });
+      } else {
+        // Si no hay un ID de apartamento en la ruta, buscar todos los contactos
+        this.contactosService.buscarTodos().subscribe(data => {
+          this.listContactos = data;
+        });
+      }
     });
   }
-
-
 }

@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 
-
 export class ApartamentosService {
 
   constructor(private http: HttpClient, private conexion: ConexionService) { }
