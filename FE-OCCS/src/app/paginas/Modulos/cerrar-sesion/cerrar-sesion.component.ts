@@ -16,7 +16,8 @@ export class CerrarSesionComponent {
   ngOnInit(): void {
   }
 
-  logout() {
-    this.authService.logout(); // Llamar al método de cerrar sesión del servicio de autenticación
+  async logout() {
+    await this.authService.logout(); // Llamar al método de cerrar sesión del servicio de autenticación
+    window.location.reload(); // Recargar la página después de eliminar el contacto
   }
 }

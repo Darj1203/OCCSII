@@ -17,7 +17,7 @@
                 <td class="text-sm text-white content-center flex justify-center">
                   <button [routerLink]="['/contactos/apartamento', apartamento.id]" class="p-2 bg-blue-500 m-2 hover:bg-blue-700">Contactos</button>
                   <button [routerLink]="['/editarapartamento', apartamento.id]" class="p-2 bg-yellow-500 m-2 hover:bg-yellow-700">Editar</button>
-                  <button class="p-2 bg-red-500 m-2  hover:bg-red-700">Eliminar</button>
+                  <button *ngIf="apartamento.id" (click)="eliminarApartamento(apartamento.id)" class="p-2 bg-red-500 m-2  hover:bg-red-700">Eliminar</button>
                 </td>
             </tr>
         </tbody>

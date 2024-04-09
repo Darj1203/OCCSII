@@ -28,5 +28,17 @@ export class ApartamentosComponent {
       this.listApartamentos = data;
     });
   }
+
+  eliminarApartamento(id: number) {
+    this.apartamentosService.eliminar(id).subscribe(
+      () => {
+        window.location.reload(); // Recargar la página después de eliminar
+      },
+      error => {
+        console.error(error);
+        alert('No se pudo eliminar el apartamento. Verifica que no tenga contactos o intentalo más tarde.');
+      }
+    );
+  }
 };
 

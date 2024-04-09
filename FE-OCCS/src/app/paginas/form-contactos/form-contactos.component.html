@@ -8,25 +8,20 @@
 
     <div class="max-w-md mx-auto bg-white p-6 rounded-md shadow-md">
 
-        <h2 class="text-2xl font-semibold mb-4">Crear Nuevo Contacto</h2>
-
-        <!-- Formulario de creación -->
-        <form action="#" method="post">
+        <h2 class="text-2xl font-semibold mb-4">{{ isEditing ? 'Editar Nuevo Contacto' : 'Crear Nuevo Contacto' }}</h2>
+        <!-- Formulario de creación y edicion-->
+        <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
             <div class="mb-4">
-                <label for="nombre" class="block text-gray-600 text-sm font-medium mb-2">Nombre:</label>
-                <input type="text" id="nombre" name="nombre" class="w-full border border-gray-300 p-2 rounded-md" required>
+                <label for="nombre" class="block text-gray-600 text-sm font-medium mb-2">Nombre Contacto:</label>
+                <input type="text" id="nombre" name="nombre" formControlName="nombre" class="w-full border border-gray-300 p-2 rounded-md" required>
             </div>
-
             <div class="mb-4">
                 <label for="telefono" class="block text-gray-600 text-sm font-medium mb-2">Número de Teléfono:</label>
-                <input type="tel" id="telefono" name="telefono" class="w-full border border-gray-300 p-2 rounded-md" required>
+                <input type="tel" id="telefono" name="telefono" formControlName="telefono" class="w-full border border-gray-300 p-2 rounded-md" required>
             </div>
-
             <div class="flex items-center">
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md">Crear</button>
             </div>
         </form>
-
     </div>
-
 </body>

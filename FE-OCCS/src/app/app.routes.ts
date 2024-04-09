@@ -4,6 +4,7 @@ import { ApartamentosComponent } from './paginas/apartamentos/apartamentos.compo
 import { ContactosComponent } from './paginas/contactos/contactos.component';
 import { FormApartamentosComponent } from './paginas/form-apartamentos/form-apartamentos.component';
 import { AuthGuard } from '../app/guards/autenticacion.guard';
+import { FormContactosComponent } from './paginas/form-contactos/form-contactos.component';
 
 
 export const routes: Routes = [
@@ -12,6 +13,8 @@ export const routes: Routes = [
     { path: 'contactos', component: ContactosComponent, title: "Contactos", canActivate: [AuthGuard]},
     { path: 'apartamentos', component: ApartamentosComponent, canActivate: [AuthGuard] },
     { path: 'contactos/apartamento/:id',component: ContactosComponent, title: "Contacto Apartamento {id}"},
-    { path: 'crearapartamento', component: FormApartamentosComponent, title: "Crear Aoartamento" },
-    { path: 'editarapartamento/:id', component: FormApartamentosComponent, title: "Editar Aprtamento"}
+    { path: 'crearapartamento', component: FormApartamentosComponent, title: "Crear Apartamento" },
+    { path: 'editarapartamento/:id', component: FormApartamentosComponent, title: "Editar Apartamento"},
+    { path: 'crearcontacto', component: FormContactosComponent, title: "Crear Contacto" },
+    { path: 'editarcontacto/:id', component: FormContactosComponent, title: "Editar Contacto"}
 ];
