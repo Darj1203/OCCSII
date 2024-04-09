@@ -1,5 +1,5 @@
 <div class="max-w-4xl mx-auto">
-    <button class="p-2 bg-green-500 border-r-4 m-2 text-white hover:bg-green-700">Crear</button>
+    <button [routerLink]="['/crearapartamento']" class="p-2 bg-green-500 border-r-4 m-2 text-white hover:bg-green-700">Crear</button>
     <!-- Tabla -->
     <table class="min-w-full bg-white border border-gray-300">
         <!-- Encabezado de la tabla -->
@@ -16,7 +16,7 @@
                 <td class="text-center">{{apartamento.apartamento}}</td>
                 <td class="text-sm text-white content-center flex justify-center">
                   <button [routerLink]="['/contactos/apartamento', apartamento.id]" class="p-2 bg-blue-500 m-2 hover:bg-blue-700">Contactos</button>
-                  <button class="p-2 bg-yellow-500 m-2 hover:bg-yellow-700">Editar</button>
+                  <button [routerLink]="['/editarapartamento', apartamento.id]" class="p-2 bg-yellow-500 m-2 hover:bg-yellow-700">Editar</button>
                   <button class="p-2 bg-red-500 m-2  hover:bg-red-700">Eliminar</button>
                 </td>
             </tr>

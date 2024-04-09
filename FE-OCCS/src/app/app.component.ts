@@ -25,7 +25,6 @@ import { ContactosComponent } from './paginas/contactos/contactos.component';
   imports: [
     CommonModule, 
     RouterOutlet,
-
     HttpClientModule,
     CerrarSesionComponent,
     MenuComponent,

@@ -28,8 +28,5 @@ export class ApartamentosComponent {
       this.listApartamentos = data;
     });
   }
-
-  
-
-  };
+};
 
