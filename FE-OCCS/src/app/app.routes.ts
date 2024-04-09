@@ -15,6 +15,6 @@ export const routes: Routes = [
     { path: 'contactos/apartamento/:id',component: ContactosComponent, title: "Contacto Apartamento {id}"},
     { path: 'crearapartamento', component: FormApartamentosComponent, title: "Crear Apartamento" },
     { path: 'editarapartamento/:id', component: FormApartamentosComponent, title: "Editar Apartamento"},
-    { path: 'crearcontacto/:id', component: FormContactosComponent, title: "Crear Contacto" },
-    { path: 'editarcontacto/:id', component: FormContactosComponent, title: "Editar Contacto"}
+    { path: 'crearcontacto/:idApartamento', component: FormContactosComponent, title: "Crear Contacto" },
+    { path: 'editarcontacto/:id/apartamento/:idApartamento', component: FormContactosComponent, title: "Editar Contacto"}
 ];
