@@ -1,4 +1,4 @@
-<button *ngIf="mostrarBotonCrear" [routerLink]="['/crearcontacto']" class="p-2 bg-green-500 border-r-4 m-2 text-white hover:bg-blue-700">Crear</button>
+<button *ngIf="mostrarBotonCrear" [routerLink]="['/crearcontacto', idApartamento]" class="p-2 bg-green-500 border-r-4 m-2 text-white hover:bg-blue-700">Crear</button>
 <div class="flex flex-wrap justify-center">
     <article *ngFor="let contacto of listContactos" class="max-w-xs mx-4 my-4 bg-white rounded overflow-hidden shadow-lg">
         <div class="p-4">

@@ -14,7 +14,7 @@ export class ContactosService {
     id: 0,
     nombre: "",
     celular: 1111111111,
-    apartamento_id: 0
+    apartamento: 0
   }
 
   public URLAPI=this.conexion.URLAPI;

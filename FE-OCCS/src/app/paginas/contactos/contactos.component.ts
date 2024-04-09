@@ -18,19 +18,20 @@ export class ContactosComponent implements OnInit {
 
   mostrarBotonCrear: boolean = false;
   listContactos: Contactos[] = [];
+  idApartamento: number | undefined;
 
   constructor(private contactosService: ContactosService, private route: ActivatedRoute) {
-
-   }
-
+  }
+   
+  
   ngOnInit(): void {
     // Obtener el parámetro de la ruta
     this.route.params.subscribe(params => {
-      const idApartamento = params['id']; // Obtener el ID del apartamento de los parámetros de la ruta
-      if (idApartamento) {
+      this.idApartamento = params['id']; // Asignar el ID del apartamento a la propiedad de la clase
+      if (this.idApartamento) {
         this.mostrarBotonCrear = true;
         // Si hay un ID de apartamento en la ruta, buscar solo los contactos de ese apartamento
-        this.contactosService.buscarIDAPARTAMENTO(idApartamento).subscribe(data => {
+        this.contactosService.buscarIDAPARTAMENTO(this.idApartamento).subscribe(data => {
           this.listContactos = data;
         });
       } else {

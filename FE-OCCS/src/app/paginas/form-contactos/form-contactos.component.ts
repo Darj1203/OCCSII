@@ -1,20 +1,21 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ContactosService } from '../../servicios/contactos.service';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-form-contactos',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './form-contactos.component.html',
-  styleUrl: './form-contactos.component.css'
+  styleUrls: ['./form-contactos.component.css']
 })
 export class FormContactosComponent {
 
   isEditing: boolean = false; // Variable para indicar si estamos editando un contacto existente
   formulario: FormGroup;
+  apartamentoId: number | undefined;
 
   constructor(    
     private router: Router,
@@ -24,37 +25,33 @@ export class FormContactosComponent {
     this.formulario = new FormGroup({
       id: new FormControl(),
       nombre: new FormControl(),
-      telefono: new FormControl()
+      celular: new FormControl(),
+      apartamento: new FormControl()
     });
 
-    // Verificar si hay un ID en la ruta para determinar si estamos editando
-    const idParam: string | null = this.route.snapshot.paramMap.get('id');
-    
-    if (idParam) {
-      this.isEditing = true;
-      const id: number = parseInt(idParam);
-      this.contactoService.buscarUno(id).subscribe(contacto => {
-        if (contacto) {
-          this.formulario.patchValue(contacto);
-        }
-      });
-    }
+    // Suscribirse a los parámetros de la ruta para obtener el id del apartamento
+    this.route.params.subscribe(params => {
+      const idParam = params['id'];
+      if (idParam) {
+        this.apartamentoId = parseInt(idParam);
+        this.formulario.get('apartamento')?.setValue(this.apartamentoId); // Establecer el id del apartamento en el formulario
+      }
+    });
   }
   
   async onSubmit() {
     if (this.formulario.valid) {
       if (this.formulario.value.id) {
-        // Editar apartamento existente
+        // Editar contacto existente
         await this.contactoService.actualizar(this.formulario.value.id, this.formulario.value).subscribe(() => {
           this.router.navigate(['/contactos']);
         });
       } else {
-        // Crear nuevo apartamento
-        this.contactoService.crearContacto(this.formulario.value).subscribe(() => {
+        // Crear nuevo contacto
+        await this.contactoService.crearContacto(this.formulario.value).subscribe(() => {
           this.router.navigate(['/contactos']);
         });
       }
     }
   }
 }
-
